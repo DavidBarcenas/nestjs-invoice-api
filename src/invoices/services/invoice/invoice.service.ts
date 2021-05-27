@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  CreateInvoiceDto,
+  UpdateInvoiceDto,
+} from 'src/invoices/dtos/invoice.dto';
 import { Invoice } from 'src/invoices/entities/invoice.entity';
 
 @Injectable()
@@ -240,27 +244,35 @@ export class InvoiceService {
   }
 
   findOne(id: string) {
-    return this.invoices.filter((i) => i.id === id);
+    const invoice = this.invoices.find((i) => i.id === id);
+    if (!invoice) {
+      throw new NotFoundException(`The invoice with id #${id} was not found.`);
+    }
+    return invoice;
   }
 
-  create(payload: any) {
-    const newInvoice = {
+  create(payload: CreateInvoiceDto) {
+    const newInvoice: Invoice = {
       id: 'ASD78S5D',
       ...payload,
     };
 
-    this.invoices.push(newInvoice);
+    this.invoices.push({ ...newInvoice });
     return newInvoice;
   }
 
-  update(id: string, payload: any) {
+  update(id: string, payload: UpdateInvoiceDto) {
     const index = this.invoices.findIndex((i) => i.id === id);
-    this.invoices[index] = { ...payload };
+    this.invoices[index] = { ...this.invoices[index], ...payload };
     return { ...payload };
   }
 
   delete(id: string) {
     const index = this.invoices.findIndex((i) => i.id === id);
+    if (index === -1) {
+      throw new NotFoundException(`The invoice with id #${id} was not found.`);
+    }
     this.invoices.splice(index, 1);
+    return true;
   }
 }

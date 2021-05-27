@@ -8,6 +8,11 @@ import {
   Put,
 } from '@nestjs/common';
 
+import {
+  CreateInvoiceDto,
+  UpdateInvoiceDto,
+} from 'src/invoices/dtos/invoice.dto';
+
 import { InvoiceService } from 'src/invoices/services/invoice/invoice.service';
 
 @Controller('invoices')
@@ -25,12 +30,12 @@ export class InvoiceController {
   }
 
   @Post()
-  create(@Body() payload: any) {
+  create(@Body() payload: CreateInvoiceDto) {
     return this.invoiceService.create(payload);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() payload: any) {
+  update(@Param('id') id: string, @Body() payload: UpdateInvoiceDto) {
     return this.invoiceService.update(id, payload);
   }
 
