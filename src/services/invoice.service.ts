@@ -1,9 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import {
-  CreateInvoiceDto,
-  UpdateInvoiceDto,
-} from 'src/invoices/dtos/invoice.dto';
-import { Invoice } from 'src/invoices/entities/invoice.entity';
+import { CreateInvoiceDto, UpdateInvoiceDto } from 'src/dtos/invoice.dto';
+import { Invoice } from 'src/entities/invoice.entity';
 
 @Injectable()
 export class InvoiceService {

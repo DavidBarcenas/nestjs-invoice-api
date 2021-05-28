@@ -1,11 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import {
-  IsArray,
-  IsNotEmpty,
-  IsNumber,
-  IsPositive,
-  IsString,
-} from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsPositive, IsString, } from 'class-validator';
 
 import { Address } from '../entities/address.entity';
 import { Product } from '../entities/product.entity';
