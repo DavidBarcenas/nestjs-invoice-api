@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Query } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 
 import {
   CreateInvoiceDto,
+  FilterInvoiceDto,
   UpdateInvoiceDto,
 } from 'src/invoices/dto/invoice.dto';
 import { Invoice } from 'src/invoices/entities/invoice.entity';
@@ -14,8 +15,13 @@ export class InvoiceService {
     @InjectModel(Invoice.name) private invoiceModel: Model<Invoice>,
   ) {}
 
-  async findAll(): Promise<Invoice[]> {
-    return await this.invoiceModel.find().exec();
+  async findAll(params?: FilterInvoiceDto): Promise<Invoice[]> {
+    const filters: FilterQuery<Invoice> = {};
+    if (params && params.status) {
+      console.log(params);
+      filters.status = params.status;
+    }
+    return await this.invoiceModel.find(filters).exec();
   }
 
   async findOne(id: string): Promise<Invoice> {

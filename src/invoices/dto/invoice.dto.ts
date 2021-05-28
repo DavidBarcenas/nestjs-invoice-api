@@ -3,6 +3,7 @@ import {
   IsArray,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsPositive,
   IsString,
 } from 'class-validator';
@@ -72,3 +73,10 @@ export class CreateInvoiceDto {
 }
 
 export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
+
+export class FilterInvoiceDto {
+  @IsString()
+  @IsOptional()
+  @ApiProperty({ description: 'Filter invoices by status' })
+  status: string;
+}
