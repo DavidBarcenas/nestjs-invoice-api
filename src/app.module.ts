@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { environments } from './environments';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { InvoiceController } from './invoices/invoice/controllers/invoice.controller';
+import { InvoiceController } from './invoices/controllers/invoice.controller';
 import { InvoiceService } from './invoices/services/invoice/invoice.service';
 import { DatabaseModule } from './database/database.module';
 
