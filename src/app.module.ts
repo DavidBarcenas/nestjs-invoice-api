@@ -1,13 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigType } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import * as Joi from 'joi';
 
 import { environments } from './environments';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { InvoiceController } from './controllers/invoice.controller';
-import { InvoiceService } from './services/invoice.service';
-import { DatabaseModule } from './database/database.module';
+import { InvoicesModule } from './invoices/invoices.module';
 import config from './config';
 
 @Module({
@@ -22,9 +19,17 @@ import config from './config';
         MONGO_PORT: Joi.string().required(),
       }),
     }),
-    DatabaseModule,
+    MongooseModule.forRootAsync({
+      useFactory: (configService: ConfigType<typeof config>) => {
+        const { connection, host, port, dbName } = configService.mongo;
+        return {
+          uri: `${connection}://${host}:${port}`,
+          dbName,
+        };
+      },
+      inject: [config.KEY],
+    }),
+    InvoicesModule,
   ],
-  controllers: [AppController, InvoiceController],
-  providers: [AppService, InvoiceService],
 })
 export class AppModule {}

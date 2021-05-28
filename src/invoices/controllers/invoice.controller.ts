@@ -9,8 +9,11 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-import { CreateInvoiceDto, UpdateInvoiceDto } from 'src/dtos/invoice.dto';
-import { InvoiceService } from 'src/services/invoice.service';
+import {
+  CreateInvoiceDto,
+  UpdateInvoiceDto,
+} from 'src/invoices/dto/invoice.dto';
+import { InvoiceService } from 'src/invoices/services/invoice.service';
 
 @ApiTags('invoices')
 @Controller('invoices')
@@ -23,6 +26,7 @@ export class InvoiceController {
     return this.invoiceService.findAll();
   }
 
+  /*
   @ApiOperation({ summary: 'Get a single invoice' })
   @Get(':id')
   getOne(@Param('id') id: string) {
@@ -46,4 +50,5 @@ export class InvoiceController {
   delete(@Param('id') id: string) {
     return this.invoiceService.delete(id);
   }
+  */
 }
