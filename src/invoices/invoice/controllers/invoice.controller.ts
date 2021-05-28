@@ -20,12 +20,12 @@ export class InvoiceController {
   constructor(private invoiceService: InvoiceService) {}
 
   @Get()
-  findAll() {
+  get() {
     return this.invoiceService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  getOne(@Param('id') id: string) {
     return this.invoiceService.findOne(id);
   }
 

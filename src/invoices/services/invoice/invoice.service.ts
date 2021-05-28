@@ -239,11 +239,11 @@ export class InvoiceService {
     },
   ];
 
-  findAll() {
+  findAll(): Invoice[] {
     return this.invoices;
   }
 
-  findOne(id: string) {
+  findOne(id: string): Invoice {
     const invoice = this.invoices.find((i) => i.id === id);
     if (!invoice) {
       throw new NotFoundException(`The invoice with id #${id} was not found.`);
@@ -251,7 +251,7 @@ export class InvoiceService {
     return invoice;
   }
 
-  create(payload: CreateInvoiceDto) {
+  create(payload: CreateInvoiceDto): Invoice {
     const newInvoice: Invoice = {
       id: 'ASD78S5D',
       ...payload,
@@ -261,13 +261,13 @@ export class InvoiceService {
     return newInvoice;
   }
 
-  update(id: string, payload: UpdateInvoiceDto) {
+  update(id: string, payload: UpdateInvoiceDto): Invoice {
     const index = this.invoices.findIndex((i) => i.id === id);
     this.invoices[index] = { ...this.invoices[index], ...payload };
-    return { ...payload };
+    return this.invoices[index];
   }
 
-  delete(id: string) {
+  delete(id: string): boolean {
     const index = this.invoices.findIndex((i) => i.id === id);
     if (index === -1) {
       throw new NotFoundException(`The invoice with id #${id} was not found.`);
