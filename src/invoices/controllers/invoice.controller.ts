@@ -26,7 +26,6 @@ export class InvoiceController {
     return this.invoiceService.findAll();
   }
 
-  /*
   @ApiOperation({ summary: 'Get a single invoice' })
   @Get(':id')
   getOne(@Param('id') id: string) {
@@ -50,5 +49,4 @@ export class InvoiceController {
   delete(@Param('id') id: string) {
     return this.invoiceService.delete(id);
   }
-  */
 }

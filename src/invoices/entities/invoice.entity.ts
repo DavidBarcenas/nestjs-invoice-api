@@ -48,9 +48,6 @@ export class Invoice extends Document {
   @ApiProperty()
   @Prop({ required: true, type: String })
   createdAt: string;
-
-  @Prop({ type: String })
-  updatedAt: string;
 }
 
 export const InvoiceSchema = SchemaFactory.createForClass(Invoice);
