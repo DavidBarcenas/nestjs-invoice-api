@@ -17,14 +17,13 @@ import config from './config';
       validationSchema: Joi.object({
         MONGO_DB: Joi.string().required(),
         MONGO_HOST: Joi.string().required(),
-        MONGO_PORT: Joi.string().required(),
       }),
     }),
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigType<typeof config>) => {
-        const { connection, host, port, dbName } = configService.mongo;
+        const { connection, host, dbName } = configService.mongo;
         return {
-          uri: `${connection}://${host}:${port}`,
+          uri: `${connection}://${host}`,
           dbName,
         };
       },
