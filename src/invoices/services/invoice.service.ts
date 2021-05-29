@@ -18,7 +18,6 @@ export class InvoiceService {
   async findAll(params?: FilterInvoiceDto): Promise<Invoice[]> {
     const filters: FilterQuery<Invoice> = {};
     if (params && params.status) {
-      console.log(params);
       filters.status = params.status;
     }
     return await this.invoiceModel.find(filters).exec();

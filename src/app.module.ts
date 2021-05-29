@@ -5,6 +5,7 @@ import * as Joi from 'joi';
 
 import { environments } from './environments';
 import { InvoicesModule } from './invoices/invoices.module';
+import { CatalogsModule } from './catalogs/catalogs.module';
 import config from './config';
 
 @Module({
@@ -30,6 +31,7 @@ import config from './config';
       inject: [config.KEY],
     }),
     InvoicesModule,
+    CatalogsModule,
   ],
 })
 export class AppModule {}

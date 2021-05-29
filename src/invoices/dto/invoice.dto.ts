@@ -77,6 +77,6 @@ export class UpdateInvoiceDto extends PartialType(CreateInvoiceDto) {}
 export class FilterInvoiceDto {
   @IsString()
   @IsOptional()
-  @ApiProperty({ description: 'Filter invoices by status' })
+  @ApiProperty({ description: 'Filter invoices by status - Optional' })
   status: string;
 }
