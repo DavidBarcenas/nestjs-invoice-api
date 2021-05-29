@@ -1,4 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsArray,
   IsNotEmpty,
@@ -62,6 +63,7 @@ export class CreateInvoiceDto {
 
   @IsArray()
   @IsNotEmpty()
+  @Type(() => Product)
   @ApiProperty({ description: 'Products purchased' })
   readonly items: Product[];
 

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Address } from './address.entity';
 import { Product } from './product.entity';
@@ -31,6 +31,7 @@ export class Invoice extends Document {
   status: string;
 
   @ApiProperty()
+  @Prop({ required: true })
   senderAddress: Address;
 
   @ApiProperty()
@@ -39,7 +40,7 @@ export class Invoice extends Document {
 
   @ApiProperty()
   @Prop({ required: true })
-  items: Product[];
+  items: Types.Array<Product>;
 
   @ApiProperty()
   @Prop({ required: true, type: Number })

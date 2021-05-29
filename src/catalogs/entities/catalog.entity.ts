@@ -2,19 +2,18 @@ import { Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Document } from 'mongoose';
 
-class Status {
-  paid: string;
-  pending: string;
-  draft: string;
+class Terms {
+  id: number;
+  name: string;
 }
 
 @Schema()
 export class Catalog extends Document {
   @ApiProperty()
-  status: Status;
+  status: string[];
 
   @ApiProperty()
-  paymentTerms: string[];
+  paymentTerms: Terms[];
 }
 
 export const CatalogSchema = SchemaFactory.createForClass(Catalog);
