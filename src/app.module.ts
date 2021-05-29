@@ -28,6 +28,8 @@ import config from './config';
         return {
           uri: `${connection}://${host}`,
           dbName,
+          user,
+          pass: password,
         };
       },
       inject: [config.KEY],
